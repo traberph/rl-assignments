@@ -1,4 +1,5 @@
-= 1 Optimal Policy - small examples
+#set heading(numbering: "1.a.1)")
+= Optimal Policy - small examples
 
 $
 gamma = 0 &: pi_"left" &&= 1 \
@@ -49,8 +50,8 @@ G_t &= sum_(j=0)^infinity gamma^(2j + 1) 2 \
 $
 
 
-= 2 Value Estimation in Grid Worlds
- == a)
+= Value Estimation in Grid Worlds
+ ==
 
  #table(
   columns: (auto, auto, auto),
@@ -65,7 +66,7 @@ $
   [10000], [0.00231], [0.01249]
 
 )
- == b)
+ ==
  $
  n>=
  ((1.96 dot sigma)/0.0004)^2
@@ -73,7 +74,7 @@ $
  approx
  3745.5624
  $
- == c)
+ ==
  $
  n>=
  ((1.96 dot sigma)/0.1)^2
