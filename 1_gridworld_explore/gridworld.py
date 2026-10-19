@@ -1,3 +1,4 @@
+import math
 import optparse
 import random
 import sys
@@ -120,9 +121,8 @@ def runEpisode(agent: agent.Agent, environment: environment.Environment, discoun
     # END IF IN A TERMINAL STATE
     actions = environment.getPossibleActions(state)
     if len(actions) == 0:
-      print("end of episode", returns)
-      message("EPISODE "+str(episode)+" COMPLETE: RETURN WAS "+str(returns)+"\n")
-      return returns  # TODO: IMPLEMENT "return" obtained in the episode
+      message(f"EPISODE {episode} COMPLETE: RETURN WAS {returns}\n")
+      return returns
       
     # GET ACTION (USUALLY FROM AGENT)
     action = decision(state)
@@ -139,11 +139,8 @@ def runEpisode(agent: agent.Agent, environment: environment.Environment, discoun
     # UPDATE LEARNER
     agent.update(state, action, nextState, reward)
 
-    # TODO: make sure you compute the returns
     returns += pow(discount, n_round) * reward
     n_round += 1
-    print(n_round, discount, returns)
-
 
 
 def parseOptions():
@@ -298,10 +295,8 @@ if __name__ == '__main__':
     value = runEpisode(a, env, opts.discount, decisionCallback, displayCallback, messageCallback, pauseCallback, episode)
     values.append(value)
   if opts.episodes > 0:
-    import math
-    print(values)
-    mean = sum(values)/len(values)
-    stdev = math.sqrt(sum([(value - mean)**2 for value in values])/len(values))
-    print(f'Mean value: {mean:2f}, Stdev: {stdev:4f}')
+    mean = sum(values)/opts.episodes
+    stdev = math.sqrt(sum([(value - mean)**2 for value in values])/opts.episodes)
+    print(f'Mean value: {mean:.5f}, Stdev: {stdev:.5f}')
 
   print()
