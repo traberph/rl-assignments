@@ -48,3 +48,38 @@ G_t &= sum_(j=0)^infinity gamma^(2j + 1) 2 \
 &= 1.overline(3)
 $
 
+
+= 2 Value Estimation in Grid Worlds
+ == a)
+
+ #table(
+  columns: (auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  table.header(
+    [*k*], [*mean*], [*std*],
+  ),
+  [10],[0.00031],[0.00063],
+  [100], [0.00345], [0.01867],
+  [1000], [0.00269], [0.01233],
+  [10000], [0.00231], [0.01249]
+
+)
+ == b)
+ $
+ n>=
+ ((1.96 dot sigma)/0.0004)^2
+ ((1.96 dot 0.01249)/0.0004)^2
+ approx
+ 3745.5624
+ $
+ == c)
+ $
+ n>=
+ ((1.96 dot sigma)/0.1)^2
+ ((1.96 dot 3.7595)/0.1)^2
+ approx
+ 5429.6561
+ $
+
+
