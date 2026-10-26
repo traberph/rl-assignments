@@ -1,4 +1,7 @@
-import util, random
+import random
+
+import util
+
 
 class Agent:
 
@@ -77,20 +80,42 @@ class ValueIterationAgent(Agent):
     self.discount = discount
     self.iterations = iterations
 
-    raise ValueError("Your code here.")
+    self.values = util.Counter()
+
+    for _ in range(self.iterations):
+      
+      # use the counter to store values as proposed
+      newValues = util.Counter() 
+
+      for state in self.mdp.getStates():
+        actions = self.mdp.getPossibleActions(state)
+        if not actions:
+          continue
+
+        actionValues = []
+        for action in actions:
+          actionValue = 0.0
+          for nextState, probability in self.mdp.getTransitionStatesAndProbs(state, action):
+            reward = self.mdp.getReward(state, action, nextState)
+            actionValue += probability * (
+              reward + self.discount * self.values.getCount(nextState) # returns 0 if not initialized
+            )
+          actionValues.append(actionValue)
+
+        newValues[state] = max(actionValues)
+
+      self.values = newValues
 
 
-
-  def getValue(self, state):
+  def getValue(self, state) -> float:
     """
     Look up the value of the state (after the indicated
     number of value iteration passes).
     """
-    raise ValueError("Your code here.")
+    return self.values.getCount(state) # lookup
 
 
-
-  def getQValue(self, state, action):
+  def getQValue(self, state, action) -> float:
     """
     Look up the q-value of the state action pair
     (after the indicated number of value iteration
@@ -98,8 +123,14 @@ class ValueIterationAgent(Agent):
     necessarily create this quantity and you may have
     to derive it on the fly.
     """
-
-    raise ValueError("Your code here.")
+    # not only a lookup
+    qValue = 0.0
+    for nextState, probability in self.mdp.getTransitionStatesAndProbs(state, action):
+      reward = self.mdp.getReward(state, action, nextState)
+      qValue += probability * (
+        reward + self.discount * self.getValue(nextState)
+      )
+    return qValue
 
 
 
@@ -109,7 +140,11 @@ class ValueIterationAgent(Agent):
     (after the indicated number of value iteration passes).
     """
 
-    raise ValueError("Your code here.")
+    actions = self.mdp.getPossibleActions(state)
+    if not actions:
+      return None
+
+    return max(actions, key=lambda action: self.getQValue(state, action))
 
 
 

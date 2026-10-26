@@ -78,6 +78,14 @@ def getMazeGrid():
           ['S',' ',' ',' ']]
   return Gridworld(grid)
 
+def getVolcanoGrid():
+  grid = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', '#', -100, '#', ' ', ' ', ' '],
+          [' ', ' ', '#', -100, -100, -100, '#', ' ', ' '],
+          ['S', '#', -100, -100, -100, -100, -100, '#', 10]
+        ]
+  return Gridworld(grid)
+
 
 
 def getUserAction(state, actionFunction):
