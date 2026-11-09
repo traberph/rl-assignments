@@ -8,4 +8,6 @@ authors = [
   { name = "Snehil Seenu" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "numpy>=2.5.4",
+]
