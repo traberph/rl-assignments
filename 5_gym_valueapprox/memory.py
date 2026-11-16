@@ -1,7 +1,8 @@
 import numpy as np
 
+
 # class to store transitions
-class Memory():
+class Memory:
     def __init__(self, max_size=100000):
         self.transitions = np.asarray([])
         self.size = 0
@@ -18,8 +19,7 @@ class Memory():
         self.current_idx = (self.current_idx + 1) % self.max_size
 
     def sample(self, batch=1):
-        if batch > self.size:
-            batch = self.size
+        batch = min(batch, self.size)
         self.inds=np.random.choice(range(self.size), size=batch, replace=False)
         return self.transitions[self.inds,:]
 

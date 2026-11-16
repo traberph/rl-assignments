@@ -1,5 +1,7 @@
-import numpy as np
 import math
+
+import numpy as np
+
 
 class PDPolicy:
     def __init__(self, env, swingup=True, eps_expl=0.2):
@@ -13,10 +15,8 @@ class PDPolicy:
         x, y, thdot = obs
         th = math.atan2(y,x)
 
-        if th < -np.pi/2 and self.swingup:
+        if th < -np.pi/2 and self.swingup or th > np.pi/2 and self.swingup:
             u = [np.sign(thdot) - .01*thdot]
-        elif th > np.pi/2 and self.swingup:
-            u = [np.sign(thdot)  - .01*thdot]
         else:
             u = np.dot(-self.K, [th, thdot])
         if np.random.rand() < self.eps_expl:

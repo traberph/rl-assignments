@@ -1,9 +1,10 @@
-import torch
 import numpy as np
+import torch
+
 
 class Feedforward(torch.nn.Module):
     def __init__(self, input_size, hidden_sizes, output_size):
-        super(Feedforward, self).__init__()
+        super().__init__()
         self.input_size = input_size
         self.hidden_sizes  = hidden_sizes
         self.output_size  = output_size
