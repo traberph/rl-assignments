@@ -10,7 +10,7 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "box2d-py>=2.3.8",
-    "gymnasium>=1.4.0",
+    "gymnasium[box2d]>=1.4.0",
     "ipympl>=0.10.0",
     "jupyterlab>=4.6.6",
     "matplotlib>=3.11.2",
