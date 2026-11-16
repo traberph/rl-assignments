@@ -9,5 +9,30 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "box2d-py>=2.3.8",
+    "gymnasium>=1.4.0",
+    "ipympl>=0.10.0",
+    "jupyterlab>=4.6.6",
+    "matplotlib>=3.11.2",
+    "notebook>=7.6.5",
     "numpy>=2.5.4",
+    "pygame>=2.6.1",
+    "swig>=4.5.1",
+    "tensorboardx>=2.6.5",
+    "torch>=2.15.0",
 ]
+
+# --- PyTorch index (optional) -------------------------------------------
+# For GPU, the default PyPI wheels normally work. For CPU-only torch,
+# uncomment the blocks below.
+#
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+# For a specific CUDA version instead, use e.g.:
+# url = "https://download.pytorch.org/whl/cu126"
